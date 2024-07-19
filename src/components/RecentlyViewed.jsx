@@ -57,62 +57,70 @@ const RecentlyViewed = () => {
       <h1 className="text-base font-bold text-center md:text-left">
         Recently Viewed
       </h1>
-      <table className="overflow-x-auto w-full mt-3 mb-1">
-        <thead>
-          <tr className="text-gray-400 uppercase leading-normal border-b border-gray-200">
-            <th className="text-left text-xs font-medium pb-1">Token</th>
-            <th className="text-center text-xs font-medium pb-1">Last Price</th>
-            <th className="text-center text-xs font-medium pb-1">24H Change</th>
-            <th className="text-center text-xs font-medium pb-1">Market Cap</th>
-          </tr>
-        </thead>
-        <tbody>
-          {watchlist.map((coin) => (
-            <tr
-              key={coin.item.coin_id}
-              className="hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push(`/coins/${coin.item.symbol}`)}
-            >
-              <td>
-                <div className="flex flex-row items-center ml-2">
-                  <img
-                    className="h-5 w-5 rounded-full object-fill"
-                    src={coin.item.large}
-                    alt={coin.item.name}
-                  />
-                  <p className="ml-2 text-sm font-medium">{coin.item.name}</p>
-                </div>
-              </td>
-              <td>
-                <p className="text-sm font-medium text-center py-1">
-                  {coin.item.data?.price?.toFixed(2)}
-                </p>
-              </td>
-              <td>
-                <p
-                  className={`text-sm font-medium text-center py-1 flex justify-center items-center gap-2 ${
-                    coin.item.data?.price_change_percentage_24h?.usd >= 0
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  <span>
-                    <FaLongArrowAltDown />
-                  </span>
-                  <span>{`${(
-                    coin.item.data?.price_change_percentage_24h?.usd || 0
-                  ).toFixed(2)}%`}</span>
-                </p>
-              </td>
-              <td>
-                <p className="text-sm font-medium text-center py-1">
-                  {coin.item.data?.market_cap || "N/A"}
-                </p>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full mt-3 mb-1">
+          <thead>
+            <tr className="text-gray-400 uppercase leading-normal border-b border-gray-200">
+              <th className="text-left text-xs font-medium pb-1">Token</th>
+              <th className="text-center text-xs font-medium pb-1">
+                Last Price
+              </th>
+              <th className="text-center text-xs font-medium pb-1">
+                24H Change
+              </th>
+              <th className="text-center text-xs font-medium pb-1">
+                Market Cap
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {watchlist.map((coin) => (
+              <tr
+                key={coin.item.coin_id}
+                className="hover:bg-gray-100 cursor-pointer"
+                onClick={() => router.push(`/coins/${coin.item.symbol}`)}
+              >
+                <td className="py-1 px-3">
+                  <div className="flex flex-row items-center">
+                    <img
+                      className="h-5 w-5 rounded-full object-fill"
+                      src={coin.item.large}
+                      alt={coin.item.name}
+                    />
+                    <p className="ml-2 text-sm font-medium">{coin.item.name}</p>
+                  </div>
+                </td>
+                <td className="py-1 px-3">
+                  <p className="text-sm font-medium text-center">
+                    {coin.item.data?.price?.toFixed(2)}
+                  </p>
+                </td>
+                <td className="py-1 px-3">
+                  <p
+                    className={`text-sm font-medium text-center flex justify-center items-center gap-2 ${
+                      coin.item.data?.price_change_percentage_24h?.usd >= 0
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }`}
+                  >
+                    <span>
+                      <FaLongArrowAltDown />
+                    </span>
+                    <span>{`${(
+                      coin.item.data?.price_change_percentage_24h?.usd || 0
+                    ).toFixed(2)}%`}</span>
+                  </p>
+                </td>
+                <td className="py-1 px-3">
+                  <p className="text-sm font-medium text-center">
+                    {coin.item.data?.market_cap || "N/A"}
+                  </p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

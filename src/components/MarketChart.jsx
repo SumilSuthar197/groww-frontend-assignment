@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Chart,
   LineController,
@@ -28,7 +28,7 @@ Chart.register(
   CategoryScale
 );
 
-const MarketChart = () => {
+const MarketChart = ({ coins, isMultiple }) => {
   const chartRef = useRef(null);
   const [selectedOption, setSelectedOption] = useState("7d");
   const [marketData, setMarketData] = useState({
@@ -37,17 +37,18 @@ const MarketChart = () => {
     error: null,
   });
   const colors = [
-    "rgb(255, 99, 132)",
     "rgb(54, 162, 235)",
+    "rgb(255, 99, 132)",
     "rgb(255, 205, 86)",
   ];
 
   const fetchMarketData = async () => {
+    setMarketData((prev) => ({ ...prev, status: "loading" }));
     try {
-      const coinsToFetch = ["bitcoin", "ethereum", "solana"];
-      const promises = coinsToFetch.map((coin) => {
-        return api.get(`/coins/${coin}/market_chart?vs_currency=usd&days=90`);
-      });
+      const coinsToFetch = isMultiple ? coins : [coins];
+      const promises = coinsToFetch.map((coin) =>
+        api.get(`/coins/${coin}/market_chart?vs_currency=usd&days=90`)
+      );
       const responses = await Promise.all(promises);
       const data = responses.map((res, index) => ({
         name: coinsToFetch[index],
@@ -68,7 +69,7 @@ const MarketChart = () => {
   useEffect(() => {
     if (marketData.status === "done" && chartRef.current) {
       const ctx = chartRef.current.getContext("2d");
-      if (!ctx) return; // Check if the context is available
+      if (!ctx) return;
 
       const fildata = filterData(true, marketData.data, selectedOption);
 
@@ -101,7 +102,7 @@ const MarketChart = () => {
                 unit: selectedOption === "24h" ? "hour" : "day",
               },
               title: {
-                display: true,
+                display: isMultiple ? true : false,
                 text: selectedOption === "24h" ? "Date (hrs)" : "Date (day)",
               },
               beginAtZero: false,
@@ -111,7 +112,7 @@ const MarketChart = () => {
             },
             y: {
               title: {
-                display: true,
+                display: isMultiple ? true : false,
                 text: "Price in USD",
               },
               beginAtZero: false,
@@ -122,11 +123,11 @@ const MarketChart = () => {
           },
           plugins: {
             title: {
-              display: true,
+              display: isMultiple ? true : false,
               text: "Global Market Cap",
             },
             legend: {
-              display: true,
+              display: isMultiple ? true : false,
             },
             tooltip: {
               mode: "index",
@@ -139,22 +140,48 @@ const MarketChart = () => {
   }, [marketData, selectedOption]);
 
   return (
-    <div className="w-full">
-      <canvas ref={chartRef} />
-      <div className="flex justify-center items-center gap-2 mt-2">
-        {["24h", "7d", "30d", "3m"].map((option) => (
-          <button
-            key={option}
-            onClick={() => setSelectedOption(option)}
-            className={`px-3 py-1 text-sm rounded-md ${
-              selectedOption === option
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-800"
-            }`}
-          >
-            {option}
-          </button>
-        ))}
+    <div
+      className={`flex justify-center items-center border-2 ${
+        isMultiple ? "border-gray-200 bg-gray-50" : "bg-white border-white"
+      }  rounded-md py-4`}
+    >
+      <div className="w-full p-3">
+        {marketData.status === "loading" && (
+          <div className="flex flex-col justify-center items-center py-4">
+            <div
+              className="spinner-border animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-blue-600 rounded-full"
+              role="status"
+            ></div>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )}
+        {marketData.status === "error" && (
+          <p className="text-red-600">
+            {"An error occurred while fetching data for the chart."}
+          </p>
+        )}
+        {marketData.status === "done" && (
+          <>
+            <canvas ref={chartRef} />
+            {
+              <div className="flex justify-center items-center gap-2 mt-2">
+                {["24h", "7d", "30d", "3m"].map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => setSelectedOption(option)}
+                    className={`px-3 py-1 text-sm rounded-md ${
+                      selectedOption === option
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200 text-gray-800"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            }
+          </>
+        )}
       </div>
     </div>
   );

@@ -13,3 +13,39 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.custom-range {
+  width: 100%;
+  height: 30px;
+  background-color: ; /* Corrected: Removed quotes */
+  opacity: 0.8;
+  outline: none;
+  transition: 0.3s;
+  -webkit-appearance: none; /* Removes default styling */
+}
+
+/* Style the thumb for WebKit browsers */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px; /* Width of the thumb */
+  height: 15px; /* Height of the thumb */
+  background: #000; /* Thumb background */
+  cursor: pointer; /* Cursor on hover */
+  clip-path: polygon(
+    50% 0%,
+    0% 100%,
+    100% 100%
+  ); /* Makes the thumb a triangle */
+}
+
+/* Style the track for WebKit browsers */
+.custom-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  background: #41b06e;
+  border-radius: 4px;
+}
+
+/* You can add equivalent styles for Firefox (using ::-moz-range-thumb, ::-moz-range-track) 
+and for IE (using ::-ms-thumb, ::-ms-track) */

@@ -50,7 +50,7 @@ const TrendingCoins = () => {
                 e.dataTransfer.setData("text/plain", JSON.stringify(coin))
               }
               className="hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push(`/coins/${coin.item.symbol}`)}
+              onClick={() => router.push(`/Coin/${coin.item.id}`)}
             >
               <td>
                 <div className="flex flex-row items-center ml-2">
