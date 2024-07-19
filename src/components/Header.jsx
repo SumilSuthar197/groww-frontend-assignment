@@ -14,7 +14,6 @@ const Header = () => {
     const searchCoin = async () => {
       if (debouncedSearch !== "") {
         try {
-          console.log("debouncedSearch", debouncedSearch);
           const response = await api.get(`/search?query=${debouncedSearch}`);
           setResults(response.data.coins);
           setShowDropdown(true);

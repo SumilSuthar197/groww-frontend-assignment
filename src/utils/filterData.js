@@ -19,13 +19,11 @@ export default function filterData(isMulti, data, time) {
         data: coin.data.filter((price) => new Date(price[0]) >= new Date(now)),
       };
     });
-    console.log("Filtered data:", filteredData);
     return filteredData;
   } else {
     const filteredData = data.filter(
       (price) => new Date(price[0]) >= new Date(now)
     );
-    console.log("Filtered data:", filteredData);
     return filteredData;
   }
 }

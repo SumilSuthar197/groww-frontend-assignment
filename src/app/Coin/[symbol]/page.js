@@ -54,12 +54,13 @@ const Page = () => {
   const { symbol } = useParams();
   const [coinDetails, setCoinDetails] = useState([]);
   const [status, setStatus] = useState("idle");
+  const { updateRecentlyViewed } = useContext(MarketDataContext);
   useEffect(() => {
     const getCoinDetails = async () => {
       try {
         const response = await api.get(`/coins/${symbol}`);
-        console.log(response.data);
         setCoinDetails(response.data);
+        updateRecentlyViewed(response.data);
         setStatus("done");
       } catch (error) {
         console.error(error);
@@ -107,6 +108,7 @@ const Page = () => {
                 <FaArrowDown size={12} />
               )}
               {coinDetails.market_data.price_change_percentage_24h.toFixed(2)}%
+              in 24H
             </span>
           </h1>
         </>
