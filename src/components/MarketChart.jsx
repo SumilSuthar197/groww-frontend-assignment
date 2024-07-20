@@ -46,6 +46,23 @@ const MarketChart = ({ coins, isMultiple }) => {
   ];
 
   const fetchMarketData = async () => {
+    const cacheKey = isMultiple
+      ? `marketData_${coins.join("_")}`
+      : `marketData_${coins}`;
+    const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+    const cachedItem = localStorage.getItem(cacheKey);
+
+    if (cachedItem) {
+      const { data, timestamp } = JSON.parse(cachedItem);
+      const currentTime = new Date().getTime();
+
+      if (currentTime - timestamp < cacheExpiry) {
+        setMarketData({ data, status: "done", error: null });
+        return;
+      } else {
+        localStorage.removeItem(cacheKey);
+      }
+    }
     setMarketData((prev) => ({ ...prev, status: "loading" }));
     try {
       const coinsToFetch = isMultiple ? coins : [coins];
@@ -57,6 +74,10 @@ const MarketChart = ({ coins, isMultiple }) => {
         name: coinsToFetch[index],
         data: res.data.prices,
       }));
+      const timestamp = new Date().getTime();
+
+      localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp }));
+
       setMarketData({ data, status: "done", error: null });
     } catch (error) {
       setMarketData({ data: [], status: "error", error });

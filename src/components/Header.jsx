@@ -83,9 +83,11 @@ const Header = () => {
     <div className="px-3 md:px-4 py-3 w-full dark:bg-gray-900 mb-2 md:mb-3">
       <div className="flex justify-between gap-2 md:gap-0 items-center flex-col md:flex-row">
         <div className="flex justify-between w-full">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-            Cryptonite
-          </h1>
+          <Link href="/">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+              Cryptonite
+            </h1>
+          </Link>
           <div className="flex flex-row gap-2 justify-center items-center">
             <Link
               href="/Explore"

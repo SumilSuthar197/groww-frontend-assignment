@@ -12,16 +12,38 @@ const TrendingCoins = () => {
 
   useEffect(() => {
     const fetchTrendingCoins = async () => {
+      const cacheKey = "trendingCoins";
+      const cacheExpiry = 10 * 60 * 1000; // 10 minutes
+      const cachedItem = localStorage.getItem(cacheKey);
+
+      if (cachedItem) {
+        const { data, timestamp } = JSON.parse(cachedItem);
+        const currentTime = new Date().getTime();
+
+        if (currentTime - timestamp < cacheExpiry) {
+          setTrendingCoins(data);
+          setStatus("done");
+          return;
+        } else {
+          localStorage.removeItem(cacheKey);
+        }
+      }
       try {
         setStatus("loading");
         const response = await api.get("/search/trending");
-        setTrendingCoins(response.data.coins);
+        const data = response.data.coins;
+        const timestamp = new Date().getTime();
+
+        localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp }));
+
+        setTrendingCoins(data);
         setStatus("done");
       } catch (error) {
         setStatus("error");
         setError(error);
       }
     };
+
     fetchTrendingCoins();
   }, []);
 
