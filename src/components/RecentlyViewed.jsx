@@ -42,7 +42,7 @@ const RecentlyViewed = () => {
                     onClick={() => router.push(`/Coin/${coin.id}`)}
                   >
                     <td className="py-1">
-                      <div className="flex flex-row items-center min-w-28">
+                      <div className="flex flex-row items-center min-w-24">
                         <img
                           className="h-5 w-5 rounded-full object-fill"
                           src={coin.image.thumb}

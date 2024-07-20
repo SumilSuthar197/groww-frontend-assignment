@@ -39,17 +39,19 @@ const Page = () => {
           <table className="w-full mt-3 mb-1">
             <thead>
               <tr className="text-gray-400 uppercase leading-normal border-b-2 border-gray-200">
-                <th className="text-left text-sm font-medium pb-1 pl-2">
+                <th className="text-left text-sm font-medium pb-1 pr-2">
                   Token
                 </th>
-                <th className="text-center text-sm font-medium pb-1">Symbol</th>
-                <th className="text-center text-sm font-medium pb-1">
+                <th className="text-center text-sm font-medium pb-1 px-3">
+                  Symbol
+                </th>
+                <th className="text-center text-sm font-medium pb-1 px-3">
                   Last Price
                 </th>
-                <th className="text-center text-sm font-medium pb-1">
+                <th className="text-center text-sm font-medium pb-1 px-3">
                   24H Change
                 </th>
-                <th className="text-center text-sm font-medium pb-1">
+                <th className="text-center text-sm font-medium pb-1 px-3">
                   Market Cap
                 </th>
               </tr>
@@ -99,8 +101,8 @@ const Page = () => {
                     className="hover:bg-gray-100 cursor-pointer"
                     onClick={() => router.push(`/Coin/${coin.id}`)}
                   >
-                    <td>
-                      <div className="flex flex-row items-center ml-2">
+                    <td className="py-1 pr-4">
+                      <div className="flex flex-row items-center">
                         <img
                           className="h-5 w-5 rounded-full object-fill"
                           src={coin.image}
@@ -109,17 +111,17 @@ const Page = () => {
                         <p className="ml-2 text-sm font-medium">{coin.name}</p>
                       </div>
                     </td>
-                    <td>
+                    <td className="py-1 px-3">
                       <p className="text-sm font-medium text-center py-1">
                         {coin.symbol}
                       </p>
                     </td>
-                    <td>
+                    <td className="py-1 px-3">
                       <p className="text-sm font-medium text-center py-1">
                         {coin.current_price.toFixed(2)}
                       </p>
                     </td>
-                    <td>
+                    <td className="py-1 px-3">
                       <p
                         className={`text-sm font-medium text-center py-1 flex justify-center items-center gap-1 ${
                           coin.price_change_percentage_24h >= 0
@@ -139,7 +141,7 @@ const Page = () => {
                         ).toFixed(2)}%`}</span>
                       </p>
                     </td>
-                    <td>
+                    <td className="py-1 px-3">
                       <p className="text-sm font-medium text-center py-1">
                         $
                         {new Intl.NumberFormat("en-US").format(
@@ -151,37 +153,37 @@ const Page = () => {
                 ))}
             </tbody>
           </table>
-          <div className="flex flex-row justify-between items-center px-2 pt-3 border-t-2 border-gray-200">
-            <button
-              className={`font-medium text-base py-2 px-4 flex items-center justify-center space-x-2 rounded transition-colors duration-150 ${
-                page <= 1 || status === "loading"
-                  ? " text-gray-300 cursor-not-allowed"
-                  : "bg-gray-900 text-white hover:bg-gray-600 hover:text-gray-200"
-              }`}
-              onClick={() => {
-                if (page <= 1) return;
-                setPage((page) => page - 1);
-              }}
-              disabled={page <= 1 || status === "loading"}
-            >
-              <MdArrowCircleLeft />
-              <span>Prev</span>
-            </button>
-            <button
-              className={`font-medium text-base py-2 px-4 flex items-center justify-center space-x-2 rounded transition-colors duration-150 ${
-                status === "loading"
-                  ? " text-gray-300 cursor-not-allowed"
-                  : "bg-gray-900 text-white hover:bg-gray-600 hover:text-gray-200"
-              }`}
-              onClick={() => {
-                setPage((page) => page + 1);
-              }}
-              disabled={status === "loading"}
-            >
-              <span>Next</span>
-              <MdArrowCircleRight />
-            </button>
-          </div>
+        </div>
+        <div className="flex flex-row justify-between items-center lg:px-2 pt-3 border-t-2 border-gray-200">
+          <button
+            className={`font-medium text-base py-2 px-4 flex items-center justify-center space-x-2 rounded transition-colors duration-150 ${
+              page <= 1 || status === "loading"
+                ? " text-gray-300 cursor-not-allowed"
+                : "bg-gray-900 text-white hover:bg-gray-600 hover:text-gray-200"
+            }`}
+            onClick={() => {
+              if (page <= 1) return;
+              setPage((page) => page - 1);
+            }}
+            disabled={page <= 1 || status === "loading"}
+          >
+            <MdArrowCircleLeft />
+            <span>Prev</span>
+          </button>
+          <button
+            className={`font-medium text-base py-2 px-4 flex items-center justify-center space-x-2 rounded transition-colors duration-150 ${
+              status === "loading"
+                ? " text-gray-300 cursor-not-allowed"
+                : "bg-gray-900 text-white hover:bg-gray-600 hover:text-gray-200"
+            }`}
+            onClick={() => {
+              setPage((page) => page + 1);
+            }}
+            disabled={status === "loading"}
+          >
+            <span>Next</span>
+            <MdArrowCircleRight />
+          </button>
         </div>
       </div>
     </div>

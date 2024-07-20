@@ -72,7 +72,7 @@ const Page = () => {
   }, []);
   if (status === "idle") {
     return (
-      <div className="flex flex-col justify-center items-center py-4">
+      <div className="flex flex-col justify-center items-center py-4 my-auto h-[500px]">
         <div
           className="spinner-border animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-blue-600 rounded-full"
           role="status"
