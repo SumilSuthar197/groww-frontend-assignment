@@ -22,10 +22,12 @@ export const MarketDataProvider = ({ children }) => {
       console.log("context fetch from local storage");
       const watchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
       setWatchlist(watchlist);
+      localStorage.setItem("watchlist", JSON.stringify(watchlist));
       const recentlyViewed = JSON.parse(
         localStorage.getItem("recentlyViewed") || "[]"
       );
       setRecentlyViewed(recentlyViewed);
+      localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
     };
     getDataFromLocalStorage();
   }, []);
@@ -46,7 +48,7 @@ export const MarketDataProvider = ({ children }) => {
   const updateWatchlist = (coin) => {
     console.log("running updateWatch");
     let list = JSON.parse(localStorage.getItem("watchlist")) || watchlist;
-    if (!list.some((watched) => watched.item.coin_id === coin.item.coin_id)) {
+    if (!list.some((watched) => watched.id === coin.id)) {
       list.unshift(coin);
       setWatchlist(list);
       localStorage.setItem("watchlist", JSON.stringify(list));

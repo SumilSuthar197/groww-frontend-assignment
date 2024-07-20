@@ -81,6 +81,13 @@ const Page = () => {
       </div>
     );
   }
+  if (status === "error") {
+    return (
+      <p className="text-red-600">
+        {"An error occurred while fetching data for the chart."}
+      </p>
+    );
+  }
   return (
     <div className="px-1">
       <div className="py-4">

@@ -1,5 +1,6 @@
 "use client";
 import api from "@/utils/api";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -47,9 +48,12 @@ const Header = () => {
       <div className="flex justify-between gap-2 md:gap-0 items-center flex-col md:flex-row">
         <div className="flex justify-between w-full">
           <h1 className="text-2xl font-bold text-gray-800">Cryptonite</h1>
-          <button className="md:hidden bg-blue-600 text-white px-4 py-[6px] rounded-md">
+          <Link
+            href="/Explore"
+            className="md:hidden bg-blue-600 text-white px-4 py-[6px] rounded-md"
+          >
             Explore
-          </button>
+          </Link>
         </div>
         <div className="flex gap-4 w-full md:w-auto">
           <div
@@ -68,26 +72,38 @@ const Header = () => {
             {showDropdown && (
               <div className="absolute top-full left-0 w-full mt-1 max-h-52 overflow-y-scroll rounded-md bg-gray-50 custom-scrollbar">
                 {results.map((coin) => (
-                  <div
+                  <Link
+                    href={`/Coin/${coin.id}`}
+                    onClick={() => {
+                      setSearch("");
+                      setShowDropdown(false);
+                    }}
                     key={coin.id}
-                    className="cursor-pointer font-semibold flex justify-start items-center p-2 hover:bg-gray-100"
                   >
-                    <img
-                      src={coin.thumb}
-                      alt={coin.name}
-                      className="w-6 h-6 mr-2"
-                    />
-                    <span>
-                      {coin.name} ({coin.symbol})
-                    </span>
-                  </div>
+                    <div
+                      key={coin.id}
+                      className="cursor-pointer font-semibold flex justify-start items-center p-2 hover:bg-gray-100"
+                    >
+                      <img
+                        src={coin.thumb}
+                        alt={coin.name}
+                        className="w-6 h-6 mr-2"
+                      />
+                      <span>
+                        {coin.name} ({coin.symbol})
+                      </span>
+                    </div>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
-          <button className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-md">
+          <Link
+            href="/Explore"
+            className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-md"
+          >
             Explore
-          </button>
+          </Link>
         </div>
       </div>
     </div>

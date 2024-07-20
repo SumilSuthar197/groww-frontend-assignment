@@ -2,7 +2,7 @@
 import api from "@/utils/api";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { FaLongArrowAltDown } from "react-icons/fa";
+import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 
 const TrendingCoins = () => {
   const [trendingCoins, setTrendingCoins] = useState([]);
@@ -28,7 +28,7 @@ const TrendingCoins = () => {
   return (
     <div className="w-full">
       <h1 className="text-lg md:text-xl font-bold text-center md:text-left">
-        Trending Markets
+        Trending Coins
       </h1>
       <div className="overflow-x-auto">
         <table className="w-full mt-3 mb-1">
@@ -53,7 +53,18 @@ const TrendingCoins = () => {
                 key={coin.item.coin_id}
                 draggable
                 onDragStart={(e) =>
-                  e.dataTransfer.setData("text/plain", JSON.stringify(coin))
+                  e.dataTransfer.setData(
+                    "text/plain",
+                    JSON.stringify({
+                      id: coin.item.id,
+                      name: coin.item.name,
+                      image: coin.item.large,
+                      current_price: coin.item.data?.price,
+                      price_change_percentage_24h:
+                        coin.item.data?.price_change_percentage_24h.usd,
+                      market_cap: coin.item.data?.market_cap,
+                    })
+                  )
                 }
                 className="hover:bg-gray-100 cursor-pointer"
                 onClick={() => router.push(`/Coin/${coin.item.id}`)}
@@ -87,7 +98,11 @@ const TrendingCoins = () => {
                     }`}
                   >
                     <span>
-                      <FaLongArrowAltDown />
+                      {coin.item.data?.price_change_percentage_24h?.usd >= 0 ? (
+                        <FaLongArrowAltUp />
+                      ) : (
+                        <FaLongArrowAltDown />
+                      )}
                     </span>
                     <span>{`${(
                       coin.item.data?.price_change_percentage_24h?.usd || 0
