@@ -46,8 +46,15 @@ Follow these steps to set up the Cryptonite application on your local machine:
     npm install
     ```
 
+4. **Set Up Environment Variables:**
 
-4. **Run the Development Server:**
+    Create a .env file in the project root and add your CoinGecko API key:
+
+    ```bash
+    NEXT_PUBLIC_API_KEY=your_coingecko_api_key
+    ```
+
+5. **Run the Development Server:**
 
     Start the Next.js development server:
 
