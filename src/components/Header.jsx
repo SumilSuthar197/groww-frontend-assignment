@@ -1,9 +1,38 @@
 "use client";
 import api from "@/utils/api";
+import { set } from "date-fns";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { IoMoon, IoSunny } from "react-icons/io5";
+
+const ToggleComponent = ({ currentTheme, handleToggle }) => {
+  return (
+    <>
+      <input
+        type="checkbox"
+        checked={currentTheme === "dark"}
+        onChange={handleToggle}
+        className="opacity-0 absolute"
+        id="checkbox"
+      />
+      <label
+        htmlFor="checkbox"
+        className="bg-[#111] w-16 h-8 rounded-full p-1 flex items-center cursor-pointer relative"
+      >
+        <IoMoon className="text-yellow-400 absolute left-2" size={18} />
+        <IoSunny className="text-yellow-500 absolute right-2" size={18} />
+        <span
+          className={`bg-white w-6 h-6 absolute rounded-full transition-transform duration-200 ease-linear ${
+            currentTheme === "dark" ? "translate-x-8" : "translate-x-0"
+          }`}
+          style={{ top: "4px" }}
+        ></span>
+      </label>
+    </>
+  );
+};
 
 const Header = () => {
   const [search, setSearch] = useState("");
@@ -13,6 +42,10 @@ const Header = () => {
   const debouncedSearch = useDebounce(search);
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
+
+  const handleToggle = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   useEffect(() => {
     const searchCoin = async () => {
@@ -50,13 +83,23 @@ const Header = () => {
     <div className="px-3 md:px-4 py-3 w-full dark:bg-gray-900 mb-2 md:mb-3">
       <div className="flex justify-between gap-2 md:gap-0 items-center flex-col md:flex-row">
         <div className="flex justify-between w-full">
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Cryptonite</h1>
-          <Link
-            href="/Explore"
-            className="md:hidden bg-blue-600 text-white px-4 py-[6px] rounded-md"
-          >
-            Explore
-          </Link>
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+            Cryptonite
+          </h1>
+          <div className="flex flex-row gap-2 justify-center items-center">
+            <Link
+              href="/Explore"
+              className="md:hidden bg-blue-600 text-white px-4 py-[6px] rounded-md"
+            >
+              Explore
+            </Link>
+            <div className="relative justify-center items-center md:hidden">
+              <ToggleComponent
+                currentTheme={currentTheme}
+                handleToggle={handleToggle}
+              />
+            </div>
+          </div>
         </div>
         <div className="flex gap-4 w-full md:w-auto">
           <div
@@ -107,14 +150,12 @@ const Header = () => {
           >
             Explore
           </Link>
-          <button
-            onClick={() =>
-              theme == "dark" ? setTheme("light") : setTheme("dark")
-            }
-            className="bg-gray-800 dark:bg-gray-50 hover:bg-gray-600 dark:hover:bg-gray-300 transition-all duration-100 text-white dark:text-gray-800 px-8 py-2 rounded-lg"
-          >
-            T
-          </button>
+          <div className="relative justify-center items-center hidden md:flex">
+            <ToggleComponent
+              currentTheme={currentTheme}
+              handleToggle={handleToggle}
+            />
+          </div>
         </div>
       </div>
     </div>
