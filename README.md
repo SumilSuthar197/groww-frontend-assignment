@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Groww Frontend Assignment
 
-## Getting Started
+Cryptonite is a web application designed to provide real-time insights into the world of cryptocurrencies. Built using Next.js, this application aims to deliver a seamless and interactive experience for users tracking various digital assets.
 
-First, run the development server:
+You can view a live demo of the project [here](https://cryptonite-sumilsuthar197.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features Implemented
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Drag-and-Drop to Watchlist**: Allows users to easily add cryptocurrencies to their watchlist by dragging and dropping items.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Responsiveness**: The application is responsive and works well on various screen sizes, ensuring a consistent user experience across devices
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Caching**: Local caching to store API responses, reducing redundant network requests and improving performance.
 
-## Learn More
+- **Dynamic Theme Switching**: Allows users to seamlessly toggle between Light and Dark modes for a personalized viewing experience.
 
-To learn more about Next.js, take a look at the following resources:
+- **Search Bar with Suggestions**: Provides real-time search suggestions to help users quickly find and select cryptocurrencies.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Next.js
+- Tailwind CSS
+- JavaScript
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Follow these steps to set up the Cryptonite application on your local machine:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/SumilSuthar197/groww-frontend-assignment.git
+    ```
+
+2. **Navigate to the Project Directory:**
+
+    ```bash
+    cd groww-frontend-assignment
+    ```
+
+3. **Install Dependencies:**
+
+    Install the necessary dependencies for the project:
+
+    ```bash
+    npm install
+    ```
+
+
+4. **Run the Development Server:**
+
+    Start the Next.js development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    After running this command, the application will be available locally at [http://localhost:3000](http://localhost:3000).
+
+## Screenshots
+
+### Home Page
+![home_page_dark_mode](https://github.com/user-attachments/assets/6df03641-eb52-40e0-b861-33ee5b3b5c7f)
+
+### Product Page
+![coin_page_dark_mode](https://github.com/user-attachments/assets/6a99f015-1caa-419b-9f7e-ff5e57c0ffad)
+
+### Explore Page 
+![explore_page_dark_mode](https://github.com/user-attachments/assets/88429ebc-a3f9-40a7-b05e-cb84713f585d)
+
