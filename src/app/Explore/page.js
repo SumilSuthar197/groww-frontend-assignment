@@ -30,7 +30,7 @@ const Page = () => {
   }, [page]);
 
   return (
-    <div className="flex justify-center items-center border-2 border-gray-200 bg-gray-50 rounded-md p-4">
+    <div className="flex justify-center items-center border-2 border-gray-200 bg-gray-50 dark:border-slate-100 dark:bg-gray-900 rounded-md p-4">
       <div className="w-full">
         <h1 className="text-lg md:text-xl font-bold text-center md:text-left">
           Coins
@@ -38,7 +38,7 @@ const Page = () => {
         <div className="overflow-x-auto">
           <table className="w-full mt-3 mb-1">
             <thead>
-              <tr className="text-gray-400 uppercase leading-normal border-b-2 border-gray-200">
+              <tr className="text-gray-400 dark:text-slate-200 uppercase leading-normal border-b-2 border-gray-200">
                 <th className="text-left text-sm font-medium pb-1 pr-2">
                   Token
                 </th>
@@ -62,7 +62,7 @@ const Page = () => {
                   <td colSpan="5" className="text-center py-8">
                     <div className="flex justify-center items-center flex-col">
                       <div
-                        className="spinner-border animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-gray-900 rounded-full"
+                        className="spinner-border animate-spin inline-block w-8 h-8 border-4 border-current border-t-transparent text-gray-900 dark:text-slate-100 rounded-full"
                         role="status"
                       ></div>
                       <span className="ml-2">Loading...</span>
@@ -98,10 +98,10 @@ const Page = () => {
                         })
                       )
                     }
-                    className="hover:bg-gray-100 cursor-pointer"
+                    className="hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
                     onClick={() => router.push(`/Coin/${coin.id}`)}
                   >
-                    <td className="py-1 pr-4">
+                    <td className="py-1 pr-3 pl-1">
                       <div className="flex flex-row items-center">
                         <img
                           className="h-5 w-5 rounded-full object-fill"

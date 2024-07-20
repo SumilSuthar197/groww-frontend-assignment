@@ -11,7 +11,7 @@ const MyLayout = ({ children }) => {
         <div className="col-span-3 lg:col-span-2 lg:px-2">{children}</div>
         <div className="col-span-3 lg:col-span-1 flex flex-col gap-2 lg:pr-4">
           <RecentlyViewed />
-          <div className="flex justify-center items-center border-2 border-gray-200 bg-gray-50 rounded-md p-3">
+          <div className="flex justify-center items-center border-2 border-gray-200 bg-gray-50 dark:border-slate-100 dark:bg-gray-900 rounded-md p-3">
             <WatchList />
           </div>
         </div>

@@ -15,6 +15,7 @@ import {
 import "chartjs-adapter-date-fns";
 import api from "@/utils/api";
 import filterData from "@/utils/filterData";
+import { useTheme } from "next-themes";
 
 Chart.register(
   LineController,
@@ -30,6 +31,8 @@ Chart.register(
 
 const MarketChart = ({ coins, isMultiple }) => {
   const chartRef = useRef(null);
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
   const [selectedOption, setSelectedOption] = useState("7d");
   const [marketData, setMarketData] = useState({
     data: [],
@@ -101,9 +104,13 @@ const MarketChart = ({ coins, isMultiple }) => {
               time: {
                 unit: selectedOption === "24h" ? "hour" : "day",
               },
+              ticks: {
+                color: currentTheme === "dark" ? "white" : "black",
+              },
               title: {
                 display: isMultiple ? true : false,
                 text: selectedOption === "24h" ? "Date (hrs)" : "Date (day)",
+                color: currentTheme === "dark" ? "white" : "black",
               },
               beginAtZero: false,
               grid: {
@@ -114,6 +121,10 @@ const MarketChart = ({ coins, isMultiple }) => {
               title: {
                 display: isMultiple ? true : false,
                 text: "Price in USD",
+                color: currentTheme === "dark" ? "white" : "black",
+              },
+              ticks: {
+                color: currentTheme === "dark" ? "white" : "black",
               },
               beginAtZero: false,
               grid: {
@@ -125,9 +136,13 @@ const MarketChart = ({ coins, isMultiple }) => {
             title: {
               display: isMultiple ? true : false,
               text: "Global Market Cap",
+              color: currentTheme === "dark" ? "white" : "black",
             },
             legend: {
               display: isMultiple ? true : false,
+              labels: {
+                color: currentTheme === "dark" ? "white" : "black",
+              },
             },
             tooltip: {
               mode: "index",
@@ -137,12 +152,14 @@ const MarketChart = ({ coins, isMultiple }) => {
         },
       });
     }
-  }, [marketData, selectedOption]);
+  }, [marketData, selectedOption, currentTheme]);
 
   return (
     <div
       className={`flex justify-center items-center border-2 ${
-        isMultiple ? "border-gray-200 bg-gray-50" : "bg-white border-white"
+        isMultiple
+          ? "border-gray-200 bg-gray-50 dark:border-slate-100 dark:bg-gray-900"
+          : "dark:border-slate-100 dark:bg-gray-900 border-white"
       }  rounded-md py-4`}
     >
       <div className="w-full p-3">

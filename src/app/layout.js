@@ -2,8 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import MyLayout from "@/components/MyLayout";
 import { MarketDataProvider } from "@/context/MarketDataContext";
-
 const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "next-themes"
 
 export const metadata = {
   title: "Cryptonite",
@@ -14,9 +14,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MarketDataProvider>
-          <MyLayout>{children}</MyLayout>
-        </MarketDataProvider>
+        <ThemeProvider attribute="class">
+          <MarketDataProvider>
+            <MyLayout>{children}</MyLayout>
+          </MarketDataProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

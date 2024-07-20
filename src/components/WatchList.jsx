@@ -25,17 +25,17 @@ const WatchList = () => {
             Watchlist
           </h1>
           <div className="overflow-x-auto">
-            <table className="w-full mt-3 mb-1">
+            <table className="w-full mt-3">
               <thead>
-                <tr className="text-gray-400 uppercase leading-normal border-b border-gray-200">
-                  <th className="text-left text-xs font-medium pb-1">Token</th>
-                  <th className="text-center text-xs font-medium pb-1">
+                <tr className="text-gray-400 dark:text-slate-200 uppercase leading-normal border-b border-gray-200">
+                  <th className="text-left text-xs font-medium pb-1 ">Token</th>
+                  <th className="text-center text-xs font-medium pb-1 ">
                     Last Price
                   </th>
-                  <th className="text-center text-xs font-medium pb-1">
+                  <th className="text-center text-xs font-medium pb-1 ">
                     24H Change
                   </th>
-                  <th className="text-center text-xs font-medium pb-1">
+                  <th className="text-center text-xs font-medium pb-1 ">
                     Market Cap
                   </th>
                 </tr>
@@ -44,10 +44,10 @@ const WatchList = () => {
                 {watchlist.map((coin) => (
                   <tr
                     key={coin.coin_id}
-                    className="hover:bg-gray-100 cursor-pointer"
+                    className="hover:bg-gray-200 dark:hover:bg-slate-700 cursor-pointer"
                     onClick={() => router.push(`/Coin/${coin.id}`)}
                   >
-                    <td className="py-1">
+                    <td className="py-2 pl-1">
                       <div className="flex flex-row items-center min-w-28">
                         <img
                           className="h-5 w-5 rounded-full object-fill"
@@ -57,12 +57,12 @@ const WatchList = () => {
                         <p className="ml-1 text-sm font-medium">{coin.name}</p>
                       </div>
                     </td>
-                    <td className="py-1 px-3">
+                    <td className="py-2 px-3">
                       <p className="text-sm font-medium text-center">
                         {coin.current_price.toFixed(2)}
                       </p>
                     </td>
-                    <td className="py-1 px-3">
+                    <td className="py-2 px-3">
                       <p
                         className={`text-sm font-medium text-center flex justify-center items-center gap-1 ${
                           coin.price_change_percentage_24h >= 0
@@ -82,7 +82,7 @@ const WatchList = () => {
                         ).toFixed(2)}%`}</span>
                       </p>
                     </td>
-                    <td className="py-1 px-3">
+                    <td className="py-2 px-3">
                       <p className="text-sm font-medium text-center">
                         {coin.market_cap || "N/A"}
                       </p>
@@ -94,7 +94,7 @@ const WatchList = () => {
           </div>
         </>
       ) : (
-        <div className="text-black min-h-[200px] flex text-center items-center justify-center">
+        <div className="text-black dark:text-slate-100 min-h-[200px] flex text-center items-center justify-center">
           Drag and drop coins here to add to your watchlist
         </div>
       )}

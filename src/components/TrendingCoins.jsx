@@ -33,7 +33,7 @@ const TrendingCoins = () => {
       <div className="overflow-x-auto">
         <table className="w-full mt-3 mb-1">
           <thead>
-            <tr className="text-gray-400 uppercase leading-normal border-b border-gray-200">
+            <tr className="text-gray-400 dark:text-slate-200 uppercase leading-normal border-b border-gray-200">
               <th className="text-left text-sm font-medium pb-1 pr-2">Token</th>
               <th className="text-center text-sm font-medium pb-1 px-3">
                 Symbol
@@ -91,10 +91,10 @@ const TrendingCoins = () => {
                       })
                     )
                   }
-                  className="hover:bg-gray-100 cursor-pointer"
+                  className="hover:bg-gray-100  dark:hover:bg-slate-700 cursor-pointer"
                   onClick={() => router.push(`/Coin/${coin.item.id}`)}
                 >
-                  <td className="py-1 pr-4">
+                  <td className="py-1 pr-3 pl-1">
                     <div className="flex flex-row items-center">
                       <img
                         className="h-5 w-5 rounded-full object-fill"

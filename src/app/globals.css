@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply dark:bg-black bg-white;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 3px;
 }
@@ -21,6 +25,8 @@
   outline: none;
   transition: 0.3s;
   -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
 }
 
 .custom-range::-webkit-slider-thumb {
@@ -28,7 +34,7 @@
   appearance: none;
   width: 15px;
   height: 15px;
-  background: #000;
+  background: #c0c0c0;
   cursor: pointer;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
@@ -38,4 +44,29 @@
   height: 8px;
   background: #41b06e;
   border-radius: 4px;
+  border: none;
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  background: #41b06e;
+}
+
+.custom-range::-moz-range-track {
+  background: #41b06e;
+  border-radius: 4px;
+}
+
+.custom-range::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+.custom-range::-ms-fill-lower {
+  background: #41b06e;
+  border-radius: 4px;
+}
+
+.custom-range::-ms-fill-upper {
+  background: #e1e1e1;
 }

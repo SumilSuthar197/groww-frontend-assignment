@@ -16,7 +16,7 @@ const PriceRangeSlider = ({
   return (
     <div className="my-2 grid grid-cols-8 md:grid-cols-8 gap-2 items-center">
       <div className="col-span-2 md:col-span-1 flex flex-col justify-center items-center">
-        <span className="text-gray-500 text-xs sm:text-sm">{lowTitle}</span>
+        <span className="text-gray-500 dark:text-slate-400 text-xs sm:text-sm">{lowTitle}</span>
         <span className="text-sm sm:text-base md:text-base font-semibold">
           {lowPrice.toFixed(2)}
         </span>
@@ -32,7 +32,7 @@ const PriceRangeSlider = ({
         />
       </div>
       <div className="col-span-2 md:col-span-1 flex flex-col justify-center items-center">
-        <span className="text-gray-500 text-xs sm:text-sm">{highTitle}</span>
+        <span className="text-gray-500 dark:text-slate-400 text-xs sm:text-sm">{highTitle}</span>
         <span className="text-sm sm:text-base md:text-base font-semibold">
           {highPrice.toFixed(2)}
         </span>
@@ -44,8 +44,8 @@ const PriceRangeSlider = ({
 const FundamentalRow = ({ title, value }) => {
   return (
     <div className="flex flex-row justify-between items-center py-1">
-      <p className="text-base text-gray-500">{title}</p>
-      <p className="text-base font-semibold text-gray-800">{value}</p>
+      <p className="text-base text-gray-500 dark:text-slate-400">{title}</p>
+      <p className="text-base font-semibold text-gray-800 dark:text-slate-100">{value}</p>
     </div>
   );
 };
@@ -97,11 +97,11 @@ const Page = () => {
           alt={`${symbol} Icon`}
         />
         <>
-          <h1 className="text-lg uppercase mt-2 font-bold text-gray-800">
+          <h1 className="text-lg uppercase mt-2 font-bold text-gray-800 dark:text-slate-100">
             {coinDetails.name}
           </h1>
-          <h1 className="text-2xl font-bold text-gray-800 flex justify-start items-center">
-            ${coinDetails.market_data.current_price.usd.toFixed(2)}
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-slate-100 flex justify-start items-center">
+            ${coinDetails.market_data.current_price.usd.toFixed(7)}
             <span
               className={`${
                 coinDetails.market_data.price_change_percentage_24h >= 0
@@ -124,7 +124,7 @@ const Page = () => {
       <MarketChart coins={symbol} isMultiple={false} />
 
       {/* Performance */}
-      <h1 className="text-base lg:text-xl font-bold text-gray-800 mt-4">
+      <h1 className="text-base lg:text-xl font-bold text-gray-800 dark:text-slate-100 mt-4">
         Performance
       </h1>
       <PriceRangeSlider
@@ -143,7 +143,7 @@ const Page = () => {
       />
       <hr className="my-4" />
       {/* Fundamentals */}
-      <h1 className="text-base lg:text-xl font-bold text-gray-800 mt-4">
+      <h1 className="text-base lg:text-xl font-bold text-gray-800 dark:text-slate-100 mt-4">
         Fundamentals
       </h1>
       <div className="py-2">
@@ -174,13 +174,13 @@ const Page = () => {
       </div>
       <hr className="my-4" />
       {/* About */}
-      <h1 className="text-base lg:text-xl font-bold text-gray-800 mt-4">
+      <h1 className="text-base lg:text-xl font-bold text-gray-800 dark:text-slate-100 mt-4">
         About {symbol}
       </h1>
       <div className="py-2">
         {coinDetails.description.en ? (
           <p
-            className="text-base text-gray-500"
+            className="text-base text-gray-500 dark:text-slate-400"
             dangerouslySetInnerHTML={{ __html: coinDetails.description.en }}
           />
         ) : (
